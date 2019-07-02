@@ -1,13 +1,22 @@
 <template>
   <div name='underway'>
-    pk中
+    pk中{{info}}
   </div>
 </template>
 
 <script type='text/babel'>
+  import APP from '@APP';
   export default {
     name: 'underway',
+    data () {
+      return {
+        info: null
+      };
+    },
     mounted () {
+      APP.loadData = (data) => {
+        this.info = data;
+      };
     }
   };
 </script>
