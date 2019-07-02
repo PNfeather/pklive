@@ -30,17 +30,11 @@
         if (data.code == 0) {
           let reData = data.data;
           this.groups = [...reData];
-          console.log(this.groups);
         } else {
           this.$message.error(data.message);
         }
       });
-    },
-    mounted () {},
-    computed: {},
-    watch: {},
-    methods: {},
-    components: {}
+    }
   };
 </script>
 <style scoped lang="less">
