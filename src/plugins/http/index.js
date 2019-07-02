@@ -1,6 +1,4 @@
 import axios from 'axios';
-import router from '@/router';
-import Vue from 'vue';
 
 // 设置用户类型
 // axios.defaults.headers.common['Clinent-Identify'] = 'H5';
