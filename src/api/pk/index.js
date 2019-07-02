@@ -1,4 +1,4 @@
 import {Http} from '@/plugins/http';
 
 // 作业列表
-export const worksList = (data) => Http.post('/detail', data);
+export const pkDetail = (data) => Http.post('/detail', data);
