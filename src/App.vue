@@ -10,7 +10,6 @@ export default {
 };
 </script>
 
-<style>
-#app {
-}
+<style lang="less">
+  @import './style/common';
 </style>
