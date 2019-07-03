@@ -2,14 +2,12 @@
   <div name='detail' class="fillcontain">
     <header class="header">PK</header>
     <section class="groups">
-      <div class="group" v-for="(group, groupIndex) in groups" :key="groupIndex">
-        <div class="item" v-for="(item, itemIndex) in group" :key="itemIndex">
-          <div class="name">{{item.name1}}</div>
-          <div class="icon">
-            <i class="iconfont iconvs"></i>
-          </div>
-          <div class="name">{{item.name2}}</div>
+      <div class="item" v-for="(item, index) in groups" :key="index">
+        <div class="name">{{item.name1}}</div>
+        <div class="icon">
+          <i class="iconfont iconvs"></i>
         </div>
+        <div class="name">{{item.name2}}</div>
       </div>
     </section>
   </div>
@@ -52,34 +50,28 @@
       padding: 29px;
       flex: 1;
       display: flex;
-      .group:last-child{
+      flex-wrap: wrap;
+      .item:nth-child(4n){
         border: none!important;
       }
-      .group{
-        flex: 1;
-        box-sizing: border-box;
+      .item{
         border-right: 1px solid #BBBBBB;
+        box-sizing: border-box;
+        width: 25%;
+        font-size: 31px;
         display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-between;
-        .item{
-          width: 100%;
-          font-size: 31px;
-          display: flex;
-          .icon{
-            flex: 47px 0 0;
-            .fac();
-            .iconfont{
-              font-size: 27px;
-              color: #FCCC60;
-            }
+        .icon{
+          flex: 47px 0 0;
+          .fac();
+          .iconfont{
+            font-size: 27px;
+            color: #FCCC60;
           }
-          .name{
-            text-align: center;
-            display: inline-block;
-            flex: 1;
-          }
+        }
+        .name{
+          display: inline-block;
+          flex: 1;
+          .fac();
         }
       }
     }

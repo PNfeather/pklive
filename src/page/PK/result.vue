@@ -1,21 +1,22 @@
 <template>
   <div name='underway' class="fillcontain">
     <header class="header">PK</header>
+    <section class="cup">
+      <span>pk</span>
+      <img src="~@IMG/cup.png" alt="">
+      <span>胜利</span>
+    </section>
     <section class="groups">
       <div class="item" v-for="(item, index) in groups" :key="index">
         <div class="name">{{item.name1}}</div>
-        <div class="icon">
-          <i class="iconfont iconvs"></i>
-        </div>
-        <div class="name">{{item.name2}}</div>
-        </div>
+      </div>
     </section>
     <footer class="footer">
       <div class="item" v-for="(item, index) in finishedList" :key="index">
         <span class="sort">{{index + 1}}、</span>
         <div class="chart" :id="'chart-' + index"></div>
         <div class="num">{{item.pre}}%</div>
-        <div class="text">完成率</div>
+        <div class="text">正确率</div>
       </div>
     </footer>
   </div>
@@ -100,39 +101,45 @@
   [name = 'underway']{
     display: flex;
     flex-direction: column;
-    overflow: hidden;
     .header{
       .wh(100%, 120px);
       .ft(36px, 120px);
       padding-left: 70px;
       border-bottom: 1px solid #BBBBBB;
     }
+    .cup{
+      flex: 220px 0 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-size:90% 126px;
+      background-image: linear-gradient(-90deg, rgba(255,199,0,0.00) 0%, rgba(254, 209, 35, 0.4) 50%, rgba(253,218,68,0.00) 100%);
+      background-repeat: no-repeat;
+      background-position: center;
+      span{
+        font-size: 56px;
+        color: #FFB600;
+        padding: 0 56px;
+      }
+      img{
+        width: 176px;
+        height: auto;
+      }
+    }
     .groups{
-      padding: 29px;
+      padding: 0 29px;
       flex: 1;
       display: flex;
+      justify-content: flex-start;
       flex-wrap: wrap;
-      .item:nth-child(4n){
-        border: none!important;
-      }
       .item{
-        border-right: 1px solid #BBBBBB;
-        box-sizing: border-box;
-        width: 25%;
+        flex: 11% 0 0;
         font-size: 31px;
         display: flex;
-        .icon{
-          flex: 47px 0 0;
-          .fac();
-          .iconfont{
-            font-size: 27px;
-            color: #FCCC60;
-          }
-        }
         .name{
+          text-align: center;
           display: inline-block;
           flex: 1;
-          .fac();
         }
       }
     }
