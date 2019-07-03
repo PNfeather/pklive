@@ -3,8 +3,14 @@
 import Vue from 'vue';
 import App from './App';
 import router from './router';
+import store from './store/';
+import APP from '@APP';
 
 (process.env.BASE_URL == '/api') && process.env.MOCK && require('@/mock');
+
+APP.loadData = (data) => {
+  store.dispatch('changeData', data);
+};
 
 Vue.config.productionTip = false;
 
@@ -12,6 +18,7 @@ Vue.config.productionTip = false;
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 });

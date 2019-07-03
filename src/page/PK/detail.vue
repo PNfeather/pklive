@@ -24,6 +24,9 @@
       };
     },
     methods: {
+      putData (data) {
+        this.groups = data.groups;
+      },
       mockInit () {
         pkDetail().then(res => {
           let data = res.data;
@@ -37,11 +40,17 @@
       },
       appInit () {
         APP.loadData = (data) => {
-          this.groups = data.groups;
+          this.putData(data);
         };
+      },
+      dataInit () {
+        if (this.$store.getters.data) {
+          this.putData(this.$store.getters.data);
+        }
       }
     },
     mounted () {
+      this.dataInit();
       this.appInit();
     }
   };

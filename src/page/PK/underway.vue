@@ -37,6 +37,42 @@
       };
     },
     methods: {
+      putData (data) {
+        this.groups = data.groups;
+        this.finishedList = data.finishedList;
+        this.$nextTick(() => {
+          for (let i = 0; i < this.finishedList.length; i++) {
+            let pre = this.finishedList[i].pre;
+            let color = pre > 50 ? '#7ACAFB' : '#FFB600';
+            let chart = echarts.init(document.getElementById('chart-' + i));
+            let option = {
+              series: [
+                {
+                  type: 'pie',
+                  radius: ['38%', '70%'],
+                  clockWise: false,
+                  itemStyle: {
+                    normal: {
+                      label: {
+                        show: false
+                      },
+                      labelLine: {
+                        show: false
+                      }
+                    }
+                  },
+                  data: [
+                    {value: pre, name: '完成'},
+                    {value: 100 - pre, name: '未完成'}
+                  ],
+                  color: [color, '#f0f0f0']
+                }
+              ]
+            };
+            chart.setOption(option);
+          }
+        });
+      },
       mockInit () {
         pkDetail().then(res => {
           let data = res.data;
@@ -91,44 +127,17 @@
       },
       appInit () {
         APP.loadData = (data) => {
-          this.groups = data.groups;
-          this.finishedList = data.finishedList;
-          this.$nextTick(() => {
-            for (let i = 0; i < this.finishedList.length; i++) {
-              let pre = this.finishedList[i].pre;
-              let color = pre > 50 ? '#7ACAFB' : '#FFB600';
-              let chart = echarts.init(document.getElementById('chart-' + i));
-              let option = {
-                series: [
-                  {
-                    type: 'pie',
-                    radius: ['38%', '70%'],
-                    clockWise: false,
-                    itemStyle: {
-                      normal: {
-                        label: {
-                          show: false
-                        },
-                        labelLine: {
-                          show: false
-                        }
-                      }
-                    },
-                    data: [
-                      {value: pre, name: '完成'},
-                      {value: 100 - pre, name: '未完成'}
-                    ],
-                    color: [color, '#f0f0f0']
-                  }
-                ]
-              };
-              chart.setOption(option);
-            }
-          });
+          this.putData(data);
         };
+      },
+      dataInit () {
+        if (this.$store.getters.data) {
+          this.putData(this.$store.getters.data);
+        }
       }
     },
     mounted () {
+      this.dataInit();
       this.appInit();
     }
   };

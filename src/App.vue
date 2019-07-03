@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="fillcontain">
+  <div id="app" class="fillcontain" style="background: #fff">
     <router-view/>
   </div>
 </template>
