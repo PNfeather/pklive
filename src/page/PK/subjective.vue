@@ -78,12 +78,12 @@
                         formatter: '{b}: {c}',
                         fontSize: '24',
                         color: '#333333',
-                        padding: [-40, -120, 0, -120]
+                        padding: [-40, -130, 0, -130]
                       },
                       labelLine: {
                         show: true,
-                        length: 20,
-                        length2: 120,
+                        length: 30,
+                        length2: 130,
                         lineStyle: {
                           color: '#999'
                         }
@@ -113,6 +113,7 @@
   [name = 'subjective']{
     padding: 29px 0;
     display: flex;
+    overflow: hidden;
     .tableArea, .chartArea{
       display: flex;
       flex-direction: column;

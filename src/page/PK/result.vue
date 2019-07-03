@@ -101,6 +101,7 @@
   [name = 'underway']{
     display: flex;
     flex-direction: column;
+    overflow: hidden;
     .header{
       .wh(100%, 120px);
       .ft(36px, 120px);
