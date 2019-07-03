@@ -1,5 +1,5 @@
 <template>
-  <div name='subjective'>
+  <div name='subjective' class="fillcontain">
     <section class="tableArea">
       <div class="title">
         考试统计-第2题 主观题
@@ -57,6 +57,13 @@
           this.$nextTick(() => {
             let chart = echarts.init(document.getElementById('chart'));
             let option = {
+              tooltip: { // 提示框，可以在全局也可以在
+                formatter: '{a} <br/>{b}: {c} ({d}%)',
+                color: '#000', // 提示框的背景色
+                textStyle: { // 提示的字体样式
+                  color: 'black'
+                }
+              },
               series: [
                 {
                   type: 'pie',
@@ -64,16 +71,27 @@
                   clockWise: false,
                   itemStyle: {
                     normal: {
+                      borderWidth: 2,
+                      borderColor: '#fff',
                       label: {
-                        show: false
+                        show: true,
+                        formatter: '{b}: {c}',
+                        fontSize: '24',
+                        color: '#333333',
+                        padding: [-40, -120, 0, -120]
                       },
                       labelLine: {
-                        show: false
+                        show: true,
+                        length: 20,
+                        length2: 120,
+                        lineStyle: {
+                          color: '#999'
+                        }
                       }
                     }
                   },
                   data: reData,
-                  color: ['#FFC04F', '#8FDA45', '#FE8989', '4E97FA']
+                  color: ['#FFC04F', '#8FDA45', '#FE8989', '#4E97FA']
                 }
               ]
             };
@@ -101,6 +119,7 @@
       padding: 0 40px;
       .title{
         height: 90px;
+        min-height: 90px;
         font-size: 36px;
         color: #333;
         border-bottom: 1px solid #BBBBBB;
@@ -144,7 +163,7 @@
         justify-content: center;
         align-items: center;
         .chart{
-          width: 450px;
+          width: 100%;
           height: 450px;
         }
       }

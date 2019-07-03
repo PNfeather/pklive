@@ -6,20 +6,20 @@ const Random = Mock.Random; // Mock.Random 是一个工具类，用于生成各�
 
 let data = []; // 用于接受生成数据的数组
 data.push({
-  name: '其他原因',
-  value: Random.integer(1, 20)
+  value: Random.integer(1, 20),
+  name: '其他原因'
 });
 data.push({
-  name: '粗心大意',
-  value: Random.integer(1, 20)
+  value: Random.integer(1, 20),
+  name: '粗心大意'
 });
 data.push({
-  name: '掌握不劳',
-  value: Random.integer(1, 20)
+  value: Random.integer(1, 20),
+  name: '掌握不劳'
 });
 data.push({
-  name: '错误理解',
-  value: Random.integer(1, 20)
+  value: Random.integer(1, 20),
+  name: '错误理解'
 });
 Mock.mock(baseUrl + '/subjectiveChart', 'get', () => {
   return {
