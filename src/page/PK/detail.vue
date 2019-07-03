@@ -14,7 +14,8 @@
 </template>
 
 <script type='text/babel'>
-  import {pkDetail} from '@/api/pk';
+  import APP from '@APP';
+  // import {pkDetail} from '@/api/pk';
   export default {
     name: 'detail',
     data () {
@@ -23,15 +24,20 @@
       };
     },
     created () {
-      pkDetail().then(res => {
-        let data = res.data;
-        if (data.code == 0) {
-          let reData = data.data;
-          this.groups = [...reData];
-        } else {
-          this.$message.error(data.message);
-        }
-      });
+      // pkDetail().then(res => {
+      //   let data = res.data;
+      //   if (data.code == 0) {
+      //     let reData = data.data;
+      //     this.groups = [...reData];
+      //   } else {
+      //     this.$message.error(data.message);
+      //   }
+      // });
+    },
+    mounted () {
+      APP.loadData = (data) => {
+        this.groups = data.groups;
+      };
     }
   };
 </script>

@@ -28,7 +28,8 @@
 </template>
 
 <script type='text/babel'>
-  import {subjectiveTable, subjectiveChart} from '@/api/pk';
+  import APP from '@APP';
+  // import {subjectiveTable, subjectiveChart} from '@/api/pk';
   // 引入基本模板
   let echarts = require('echarts/lib/echarts');
   // 引入各类图组件
@@ -41,68 +42,115 @@
       };
     },
     created () {
-      subjectiveTable().then(res => {
-        let data = res.data;
-        if (data.code == 0) {
-          let reData = data.data;
-          this.tableData = [...reData];
-        } else {
-          this.$message.error(data.message);
-        }
-      });
-      subjectiveChart().then(res => {
-        let data = res.data;
-        if (data.code == 0) {
-          let reData = data.data;
-          this.$nextTick(() => {
-            let chart = echarts.init(document.getElementById('chart'));
-            let option = {
-              tooltip: { // 提示框，可以在全局也可以在
-                formatter: '{a} <br/>{b}: {c} ({d}%)',
-                color: '#000', // 提示框的背景色
-                textStyle: { // 提示的字体样式
-                  color: 'black'
-                }
-              },
-              series: [
-                {
-                  type: 'pie',
-                  radius: ['38%', '70%'],
-                  clockWise: false,
-                  itemStyle: {
-                    normal: {
-                      borderWidth: 2,
-                      borderColor: '#fff',
-                      label: {
-                        show: true,
-                        formatter: '{b}: {c}',
-                        fontSize: '24',
-                        color: '#333333',
-                        padding: [-40, -130, 0, -130]
-                      },
-                      labelLine: {
-                        show: true,
-                        length: 30,
-                        length2: 130,
-                        lineStyle: {
-                          color: '#999'
-                        }
+      // subjectiveTable().then(res => {
+      //   let data = res.data;
+      //   if (data.code == 0) {
+      //     let reData = data.data;
+      //     this.tableData = [...reData];
+      //   } else {
+      //     this.$message.error(data.message);
+      //   }
+      // });
+      // subjectiveChart().then(res => {
+      //   let data = res.data;
+      //   if (data.code == 0) {
+      //     let reData = data.data;
+      //     this.$nextTick(() => {
+      //       let chart = echarts.init(document.getElementById('chart'));
+      //       let option = {
+      //         tooltip: { // 提示框，可以在全局也可以在
+      //           formatter: '{a} <br/>{b}: {c} ({d}%)',
+      //           color: '#000', // 提示框的背景色
+      //           textStyle: { // 提示的字体样式
+      //             color: 'black'
+      //           }
+      //         },
+      //         series: [
+      //           {
+      //             type: 'pie',
+      //             radius: ['38%', '70%'],
+      //             clockWise: false,
+      //             itemStyle: {
+      //               normal: {
+      //                 borderWidth: 2,
+      //                 borderColor: '#fff',
+      //                 label: {
+      //                   show: true,
+      //                   formatter: '{b}: {c}',
+      //                   fontSize: '24',
+      //                   color: '#333333',
+      //                   padding: [-40, -130, 0, -130]
+      //                 },
+      //                 labelLine: {
+      //                   show: true,
+      //                   length: 30,
+      //                   length2: 130,
+      //                   lineStyle: {
+      //                     color: '#999'
+      //                   }
+      //                 }
+      //               }
+      //             },
+      //             data: reData,
+      //             color: ['#FFC04F', '#8FDA45', '#FE8989', '#4E97FA']
+      //           }
+      //         ]
+      //       };
+      //       chart.setOption(option);
+      //     });
+      //   } else {
+      //     this.$message.error(data.message);
+      //   }
+      // });
+    },
+    mounted () {
+      APP.loadData = (data) => {
+        this.tableData = data.tableData;
+        this.$nextTick(() => {
+          let chart = echarts.init(document.getElementById('chart'));
+          let option = {
+            tooltip: { // 提示框，可以在全局也可以在
+              formatter: '{a} <br/>{b}: {c} ({d}%)',
+              color: '#000', // 提示框的背景色
+              textStyle: { // 提示的字体样式
+                color: 'black'
+              }
+            },
+            series: [
+              {
+                type: 'pie',
+                radius: ['38%', '70%'],
+                clockWise: false,
+                itemStyle: {
+                  normal: {
+                    borderWidth: 2,
+                    borderColor: '#fff',
+                    label: {
+                      show: true,
+                      formatter: '{b}: {c}',
+                      fontSize: '24',
+                      color: '#333333',
+                      padding: [-40, -130, 0, -130]
+                    },
+                    labelLine: {
+                      show: true,
+                      length: 30,
+                      length2: 130,
+                      lineStyle: {
+                        color: '#999'
                       }
                     }
-                  },
-                  data: reData,
-                  color: ['#FFC04F', '#8FDA45', '#FE8989', '#4E97FA']
-                }
-              ]
-            };
-            chart.setOption(option);
-          });
-        } else {
-          this.$message.error(data.message);
-        }
-      });
+                  }
+                },
+                data: data.chartData,
+                color: ['#FFC04F', '#8FDA45', '#FE8989', '#4E97FA']
+              }
+            ]
+          };
+          chart.setOption(option);
+        });
+      };
     },
-    mounted () {},
     computed: {},
     watch: {},
     methods: {},
