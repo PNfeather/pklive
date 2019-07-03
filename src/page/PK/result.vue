@@ -130,7 +130,7 @@
       }
     },
     mounted () {
-      this.mockInit();
+      this.appInit();
     }
   };
 </script>

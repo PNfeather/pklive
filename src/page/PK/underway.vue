@@ -91,7 +91,7 @@
       },
       appInit () {
         APP.loadData = (data) => {
-          this.groups = data;
+          this.groups = data.groups;
           this.finishedList = data.finishedList;
           this.$nextTick(() => {
             for (let i = 0; i < this.finishedList.length; i++) {
@@ -129,7 +129,7 @@
       }
     },
     mounted () {
-      this.mockInit();
+      this.appInit();
     }
   };
 </script>
