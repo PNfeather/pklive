@@ -24,7 +24,7 @@
 
 <script type='text/babel'>
   import APP from '@APP';
-  // import {pkDetail, pkFinishedPre} from '@/api/pk';
+  import {pkDetail, pkFinishedPre} from '@/api/pk';
   // 引入基本模板
   let echarts = require('echarts/lib/echarts');
   // 引入各类图组件
@@ -37,96 +37,100 @@
         finishedList: []
       };
     },
-    created () {
-      // pkDetail().then(res => {
-      //   let data = res.data;
-      //   if (data.code == 0) {
-      //     let reData = data.data;
-      //     this.groups = [...reData];
-      //   } else {
-      //     this.$message.error(data.message);
-      //   }
-      // });
-      // pkFinishedPre().then(res => {
-      //   let data = res.data;
-      //   if (data.code == 0) {
-      //     let reData = data.data;
-      //     this.finishedList = reData;
-      //     this.$nextTick(() => {
-      //       for (let i = 0; i < this.finishedList.length; i++) {
-      //         let pre = this.finishedList[i].pre;
-      //         let color = pre > 50 ? '#7ACAFB' : '#FFB600';
-      //         let chart = echarts.init(document.getElementById('chart-' + i));
-      //         let option = {
-      //           series: [
-      //             {
-      //               type: 'pie',
-      //               radius: ['38%', '70%'],
-      //               clockWise: false,
-      //               itemStyle: {
-      //                 normal: {
-      //                   label: {
-      //                     show: false
-      //                   },
-      //                   labelLine: {
-      //                     show: false
-      //                   }
-      //                 }
-      //               },
-      //               data: [
-      //                 {value: pre, name: '完成'},
-      //                 {value: 100 - pre, name: '未完成'}
-      //               ],
-      //               color: [color, '#f0f0f0']
-      //             }
-      //           ]
-      //         };
-      //         chart.setOption(option);
-      //       }
-      //     });
-      //   } else {
-      //     this.$message.error(data.message);
-      //   }
-      // });
-    },
-    mounted () {
-      APP.loadData = (data) => {
-        this.groups = data.groups;
-        this.finishedList = data.finishedList;
-        this.$nextTick(() => {
-          for (let i = 0; i < this.finishedList.length; i++) {
-            let pre = this.finishedList[i].pre;
-            let color = pre > 50 ? '#7ACAFB' : '#FFB600';
-            let chart = echarts.init(document.getElementById('chart-' + i));
-            let option = {
-              series: [
-                {
-                  type: 'pie',
-                  radius: ['38%', '70%'],
-                  clockWise: false,
-                  itemStyle: {
-                    normal: {
-                      label: {
-                        show: false
-                      },
-                      labelLine: {
-                        show: false
-                      }
-                    }
-                  },
-                  data: [
-                    {value: pre, name: '完成'},
-                    {value: 100 - pre, name: '未完成'}
-                  ],
-                  color: [color, '#f0f0f0']
-                }
-              ]
-            };
-            chart.setOption(option);
+    methods: {
+      mockInit () {
+        pkDetail().then(res => {
+          let data = res.data;
+          if (data.code == 0) {
+            let reData = data.data;
+            this.groups = [...reData];
+          } else {
+            this.$message.error(data.message);
           }
         });
-        // this.info = data;
-      };
+        pkFinishedPre().then(res => {
+          let data = res.data;
+          if (data.code == 0) {
+            let reData = data.data;
+            this.finishedList = reData;
+            this.$nextTick(() => {
+              for (let i = 0; i < this.finishedList.length; i++) {
+                let pre = this.finishedList[i].pre;
+                let color = pre > 50 ? '#7ACAFB' : '#FFB600';
+                let chart = echarts.init(document.getElementById('chart-' + i));
+                let option = {
+                  series: [
+                    {
+                      type: 'pie',
+                      radius: ['38%', '70%'],
+                      clockWise: false,
+                      itemStyle: {
+                        normal: {
+                          label: {
+                            show: false
+                          },
+                          labelLine: {
+                            show: false
+                          }
+                        }
+                      },
+                      data: [
+                        {value: pre, name: '完成'},
+                        {value: 100 - pre, name: '未完成'}
+                      ],
+                      color: [color, '#f0f0f0']
+                    }
+                  ]
+                };
+                chart.setOption(option);
+              }
+            });
+          } else {
+            this.$message.error(data.message);
+          }
+        });
+      },
+      appInit () {
+        APP.loadData = (data) => {
+          this.groups = data.groups;
+          this.finishedList = data.finishedList;
+          this.$nextTick(() => {
+            for (let i = 0; i < this.finishedList.length; i++) {
+              let pre = this.finishedList[i].pre;
+              let color = pre > 50 ? '#7ACAFB' : '#FFB600';
+              let chart = echarts.init(document.getElementById('chart-' + i));
+              let option = {
+                series: [
+                  {
+                    type: 'pie',
+                    radius: ['38%', '70%'],
+                    clockWise: false,
+                    itemStyle: {
+                      normal: {
+                        label: {
+                          show: false
+                        },
+                        labelLine: {
+                          show: false
+                        }
+                      }
+                    },
+                    data: [
+                      {value: pre, name: '完成'},
+                      {value: 100 - pre, name: '未完成'}
+                    ],
+                    color: [color, '#f0f0f0']
+                  }
+                ]
+              };
+              chart.setOption(option);
+            }
+          });
+        };
+      }
+    },
+    mounted () {
+      this.mockInit();
     }
   };
 </script>
