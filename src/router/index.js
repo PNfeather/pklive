@@ -9,6 +9,8 @@ const underway = r => require.ensure([], () => r(require('@/page/PK/underway')),
 const detail = r => require.ensure([], () => r(require('@/page/PK/detail')), 'detail');
 // PK结果
 const result = r => require.ensure([], () => r(require('@/page/PK/result')), 'result');
+// 主观题
+const subjective = r => require.ensure([], () => r(require('@/page/PK/subjective')), 'subjective');
 
 export default new Router({
   routes: [
@@ -24,6 +26,9 @@ export default new Router({
     }, {
       path: '/result',
       component: result
+    }, {
+      path: '/subjective',
+      component: subjective
     }
   ]
 });
