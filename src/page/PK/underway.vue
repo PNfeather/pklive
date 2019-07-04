@@ -131,15 +131,16 @@
         };
       },
       dataInit () {
-        if (this.$store.getters.data) {
-          this.putData(this.$store.getters.data);
+        let data;
+        window.cpa && (data = window.cpa.getData());
+        if (data) {
+          this.putData(JSON.parse(data));
         }
       }
     },
     mounted () {
       this.dataInit();
       this.appInit();
-      window.cpa && window.cpa.notify('ready', null);
     }
   };
 </script>
