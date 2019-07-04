@@ -164,6 +164,7 @@
     mounted () {
       this.dataInit();
       this.appInit();
+      window.cpa.notify('ready', null);
     }
   };
 </script>
