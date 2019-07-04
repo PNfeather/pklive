@@ -110,9 +110,8 @@
       }
     },
     mounted () {
-      // this.dataInit();
-      // this.appInit();
-      this.mockInit(); // todo 待修改或完善
+      this.dataInit();
+      this.appInit();
     }
   };
 </script>
