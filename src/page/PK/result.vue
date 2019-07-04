@@ -71,6 +71,9 @@
               ]
             };
             chart.setOption(option);
+            window.addEventListener('load', () => {
+              chart.resize();
+            });
             window.addEventListener('resize', () => {
               chart.resize();
             });
@@ -153,6 +156,7 @@
       justify-content: flex-start;
       flex-wrap: wrap;
       align-content:flex-start;
+      flex: 1;
       .item{
         flex: 11% 0 0;
         font-size: 0.31rem;

@@ -5,7 +5,7 @@
         考试统计-第2题 主观题
       </div>
       <div class="body">
-        <div class="table" ref="table">
+        <div class="table" ref="table" v-show="tableData.length">
           <div class="item" v-for="(item, index) in tableData" :key="index">
             <div>
               <span class="name">{{item.name}}</span> <span class="score">{{item.score.toFixed(1)}}分</span>
@@ -90,6 +90,10 @@
         this.$nextTick(() => {
           let chart = echarts.init(document.getElementById('chart'));
           this.setOption(chart, data);
+          window.addEventListener('load', () => {
+            this.setOption(chart, data, true);
+            chart.resize();
+          });
           window.addEventListener('resize', () => {
             this.setOption(chart, data, true);
             chart.resize();

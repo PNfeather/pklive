@@ -70,6 +70,9 @@
               ]
             };
             chart.setOption(option);
+            window.addEventListener('load', () => {
+              chart.resize();
+            });
             window.addEventListener('resize', () => {
               chart.resize();
             });
@@ -132,6 +135,7 @@
       display: flex;
       flex-wrap: wrap;
       align-content: flex-start;
+      flex: 1;
       .item:nth-child(4n){
         border: none!important;
       }
