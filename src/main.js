@@ -9,7 +9,7 @@ import 'nprogress/nprogress.css';
 (process.env.BASE_URL == '/api') && process.env.MOCK && require('@/mock');
 
 let setRem = () => {
-  let whdef = 10 / 1450;// 表示1450的设计图,使用10PX的默认值
+  let whdef = 100 / 1450;// 表示1450的设计图,使用10PX的默认值
   let bodyWidth = document.body.clientWidth;// 当前窗口的宽度
   let rem = bodyWidth * whdef;// 以默认比例值乘以当前窗口宽度,得到该宽度下的相应FONT-SIZE值
   document.getElementsByTagName('html')[0].style.fontSize = rem + 'px';

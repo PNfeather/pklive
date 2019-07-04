@@ -52,8 +52,9 @@
       }
     },
     mounted () {
-      this.dataInit();
-      this.appInit();
+      // this.dataInit();
+      // this.appInit();
+      this.mockInit(); // todo 待修改或完善
     }
   };
 </script>
@@ -64,14 +65,13 @@
     flex-direction: column;
     overflow: hidden;
     .header{
-      .wh(100%, 120px);
-      .ft(36px, 120px);
-      padding-left: 70px;
+      .wh(100%, 1.2rem);
+      .ft(0.36rem, 1.2rem);
+      padding-left: 0.7rem;
       border-bottom: 1px solid #BBBBBB;
     }
     .groups{
-      padding: 29px;
-      flex: 1;
+      padding: 0.29rem;
       display: flex;
       flex-wrap: wrap;
       .item:nth-child(4n){
@@ -81,13 +81,14 @@
         border-right: 1px solid #BBBBBB;
         box-sizing: border-box;
         width: 25%;
-        font-size: 31px;
+        font-size: 0.31rem;
+        line-height: .6rem;
         display: flex;
         .icon{
-          flex: 47px 0 0;
+          flex: 0.47rem 0 0;
           .fac();
           .iconfont{
-            font-size: 27px;
+            font-size: 0.27rem;
             color: #FCCC60;
           }
         }
