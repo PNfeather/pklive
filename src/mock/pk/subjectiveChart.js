@@ -4,23 +4,24 @@ let baseUrl = process.env.BASE_URL;
 
 const Random = Mock.Random; // Mock.Random 是一个工具类，用于生成各种随机数据
 
-let data = []; // 用于接受生成数据的数组
-data.push({
-  value: Random.integer(1, 20),
-  name: '其他原因'
-});
-data.push({
-  value: Random.integer(1, 20),
-  name: '粗心大意'
-});
-data.push({
-  value: Random.integer(1, 20),
-  name: '掌握不劳'
-});
-data.push({
-  value: Random.integer(1, 20),
-  name: '错误理解'
-});
+let data = [{ // 用于接受生成数据的数组
+  'name': '掌握不牢',
+  'count': Random.integer(1, 20),
+  'color': '#5C97FF'
+}, {
+  'name': '粗心大意',
+  'count': Random.integer(1, 20),
+  'color': '#8FDA45'
+}, {
+  'name': '其他原因',
+  'count': Random.integer(1, 20),
+  'color': '#FFC04F'
+}, {
+  'name': '错误理解',
+  'count': Random.integer(1, 20),
+  'color': '#FE8989'
+}];
+
 Mock.mock(baseUrl + '/subjectiveChart', 'get', () => {
   return {
     'code': 0,

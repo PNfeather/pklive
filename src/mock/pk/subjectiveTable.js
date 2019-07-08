@@ -8,9 +8,11 @@ let data = []; // 用于接受生成数据的数组
 let dataNum = Random.integer(15, 16);
 for (let i = 0; i < dataNum; i++) { // 可自定义生成的个数
   let template = {
-    'name': Random.cname(),
-    'score': Random.integer(0, 100),
-    'checker': Random.cname()
+    'name': Random.cname(), // 答题人
+    'macAddress': '7C4685BF9316',
+    'score': Random.integer(15, 100),
+    'answerUrl': ['api/pictures/597817536494436352.jpg'],
+    'markerName': Random.cname() // 批阅人
   };
   data.push(template);
 }

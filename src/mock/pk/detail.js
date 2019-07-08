@@ -8,8 +8,28 @@ let data = []; // 用于接受生成数据的数组
 let dataNum = Random.integer(32, 40);
 for (let i = 0; i < dataNum; i++) { // 可自定义生成的个数
   let template = {
-    'name1': Random.cname(),
-    'name2': Random.cname()
+    'pkPlayerList': [{
+      'studentCode': '578603536418344960',
+      'studentName': Random.cname(),
+      'studentMacAddress': '7C4685BFD131',
+      'gender': 'FEMALE',
+      'pkVictoryRate': 33,
+      'pkVictoryNumber': 1,
+      'pkFailNumber': 1,
+      'pkDrawNumber': 1,
+      'pkResult': 'PK_RESULT_DRAW',
+      'pkRank': 1,
+      'pkStatus': 'PK_STATUS_ANSWERRING'
+    }, {
+      'studentCode': '578603536036663296',
+      'studentName': Random.cname(),
+      'studentMacAddress': '7C4685BF9316',
+      'pkFailNumber': 1,
+      'pkDrawNumber': 2,
+      'pkResult': 'PK_RESULT_DRAW',
+      'pkRank': 2,
+      'pkStatus': 'PK_STATUS_SUBMITTED'
+    }]
   };
   data.push(template);
 }
