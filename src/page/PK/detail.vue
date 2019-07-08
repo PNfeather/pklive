@@ -1,13 +1,13 @@
 <template>
   <div name='detail' class="fillcontain">
     <header class="header">PK</header>
-    <section class="groups">
-      <div class="item" v-for="(item, index) in groups" :key="index">
-        <div class="name">{{item.name1}}</div>
+    <section class="pkTableDetail">
+      <div class="item" v-for="(item, index) in pkTableDetail" :key="index">
+        <div class="name" :class="{winner: item.pkPlayerList[0].pkResult == 'PK_RESULT_VICTORY'}">{{item.pkPlayerList[0].studentName}}</div>
         <div class="icon">
           <i class="iconfont iconvs"></i>
         </div>
-        <div class="name">{{item.name2}}</div>
+        <div class="name" :class="{winner: item.pkPlayerList[1].pkResult == 'PK_RESULT_VICTORY'}">{{item.pkPlayerList[1].studentName}}</div>
       </div>
     </section>
   </div>
@@ -20,19 +20,19 @@
     name: 'detail',
     data () {
       return {
-        groups: []
+        pkTableDetail: []
       };
     },
     methods: {
       putData (data) {
-        this.groups = data.groups;
+        this.pkTableDetail = data.pkTableDetail;
       },
       mockInit () {
         pkDetail().then(res => {
           let data = res.data;
           if (data.code == 0) {
             let reData = data.data;
-            this.groups = [...reData];
+            this.pkTableDetail = [...reData];
           } else {
             this.$message.error(data.message);
           }
@@ -52,8 +52,9 @@
       }
     },
     mounted () {
-      this.dataInit();
-      this.appInit();
+      // this.dataInit();
+      // this.appInit();
+      this.mockInit(); // todo 待修改或完善
     }
   };
 </script>
@@ -69,7 +70,7 @@
       padding-left: 0.7rem;
       border-bottom: 1px solid #BBBBBB;
     }
-    .groups{
+    .pkTableDetail{
       padding: 0.29rem;
       display: flex;
       flex-wrap: wrap;
@@ -95,6 +96,9 @@
           display: inline-block;
           flex: 1;
           .fac();
+        }
+        .winner{
+          color: #30BF6C;
         }
       }
     }

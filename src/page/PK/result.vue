@@ -6,16 +6,16 @@
       <img src="~@IMG/cup.png" alt="">
       <span>胜利</span>
     </section>
-    <section class="groups">
-      <div class="item" v-for="(item, index) in groups" :key="index">
-        <div class="name">{{item.name1}}</div>
+    <section class="pkTableDetail">
+      <div class="item" v-for="(item, index) in pkTableDetail" :key="index">
+        <div class="name" v-show="child.pkResult == 'PK_RESULT_VICTORY'" v-for="(child, childIndex) in item.pkPlayerList" :key="childIndex">{{child.studentName}}</div>
       </div>
     </section>
     <footer class="footer">
-      <div class="item" v-for="(item, index) in finishedList" :key="index">
-        <span class="sort">{{index + 1}}、</span>
+      <div class="item" v-for="(item, index) in pkProblemReachRate" :key="index">
+        <span class="sort">{{item.number}}、</span>
         <div class="chart" :id="'chart-' + index"></div>
-        <div class="num">{{item.pre}}%</div>
+        <div class="num">{{item.rightRate}}%</div>
         <div class="text">正确率</div>
       </div>
     </footer>
@@ -33,17 +33,17 @@
     name: 'underway',
     data () {
       return {
-        groups: [],
-        finishedList: []
+        pkTableDetail: [],
+        pkProblemReachRate: []
       };
     },
     methods: {
       putData (data) {
-        this.groups = data.groups;
-        this.finishedList = data.finishedList;
+        this.pkTableDetail = data.pkTableDetail;
+        this.pkProblemReachRate = data.pkProblemReachRate;
         this.$nextTick(() => {
-          for (let i = 0; i < this.finishedList.length; i++) {
-            let pre = this.finishedList[i].pre;
+          for (let i = 0; i < this.pkProblemReachRate.length; i++) {
+            let pre = this.pkProblemReachRate[i].rightRate;
             let color = pre > 50 ? '#7ACAFB' : '#FFB600';
             let chart = echarts.init(document.getElementById('chart-' + i));
             let option = {
@@ -87,13 +87,13 @@
           let data2 = res[1].data;
           if (data1.code == 0) {
             let reData = data1.data;
-            result.groups = [...reData];
+            result.pkTableDetail = [...reData];
           } else {
             this.$message.error(data1.message);
           }
           if (data2.code == 0) {
             let reData = data2.data;
-            result.finishedList = [...reData];
+            result.pkProblemReachRate = [...reData];
           } else {
             this.$message.error(data2.message);
           }
@@ -114,8 +114,9 @@
       }
     },
     mounted () {
-      this.dataInit();
-      this.appInit();
+      // this.dataInit();
+      // this.appInit();
+      this.mockInit(); // todo 待修改或完善
     }
   };
 </script>
@@ -150,7 +151,7 @@
         height: auto;
       }
     }
-    .groups{
+    .pkTableDetail{
       padding: 0 0.29rem;
       display: flex;
       justify-content: flex-start;

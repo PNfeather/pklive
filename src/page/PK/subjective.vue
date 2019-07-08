@@ -5,16 +5,16 @@
         考试统计-第2题 主观题
       </div>
       <div class="body">
-        <div class="table" ref="table" v-show="tableData.length">
-          <div class="item" v-for="(item, index) in tableData" :key="index">
+        <div class="table" ref="table" v-show="subjectiveQuestionList.length">
+          <div class="item" v-for="(item, index) in subjectiveQuestionList" :key="index">
             <div>
               <span class="name">{{item.name}}</span> <span class="score">{{item.score.toFixed(1)}}分</span>
             </div>
             <div>
-              <span class="checker">批阅人 {{item.checker}}</span>
+              <span class="checker">批阅人 {{item.markerName}}</span>
             </div>
           </div>
-          <div class="item" v-show="!!(tableData.length % 2)"></div>
+          <div class="item" v-show="!!(subjectiveQuestionList.length % 2)"></div>
         </div>
       </div>
     </section>
@@ -38,12 +38,22 @@
     name: 'subjective',
     data () {
       return {
-        tableData: []
+        subjectiveQuestionList: []
       };
     },
     methods: {
       setOption (chart, data, type = false) {
         let unit = document.body.clientWidth * 100 / 1450;
+        let dataList = [];
+        let colorList = [];
+        data.forEach((item) => {
+          let cell = {
+            value: item.count,
+            name: item.name
+          };
+          dataList.push(cell);
+          colorList.push(item.color);
+        });
         let option = {
           tooltip: { // 提示框，可以在全局也可以在
             formatter: '{a} <br/>{b}: {c} ({d}%)',
@@ -78,24 +88,25 @@
                   }
                 }
               },
-              data: data.chartData,
-              color: ['#FFC04F', '#8FDA45', '#FE8989', '#4E97FA']
+              data: dataList,
+              color: colorList
             }
           ]
         };
         chart.setOption(option, type);
       },
       putData (data) {
-        this.tableData = data.tableData;
+        console.log(data);
+        this.subjectiveQuestionList = data.subjectiveQuestionList;
         this.$nextTick(() => {
           let chart = echarts.init(document.getElementById('chart'));
-          this.setOption(chart, data);
+          this.setOption(chart, data.rethinkAbilityList);
           window.addEventListener('load', () => {
-            this.setOption(chart, data, true);
+            this.setOption(chart, data.rethinkAbilityList, true);
             chart.resize();
           });
           window.addEventListener('resize', () => {
-            this.setOption(chart, data, true);
+            this.setOption(chart, data.rethinkAbilityList, true);
             chart.resize();
           });
         });
@@ -107,13 +118,13 @@
           let data2 = res[1].data;
           if (data1.code == 0) {
             let reData = data1.data;
-            result.tableData = [...reData];
+            result.subjectiveQuestionList = [...reData];
           } else {
             this.$message.error(data1.message);
           }
           if (data2.code == 0) {
             let reData = data2.data;
-            result.chartData = [...reData];
+            result.rethinkAbilityList = [...reData];
           } else {
             this.$message.error(data2.message);
           }
@@ -134,8 +145,9 @@
       }
     },
     mounted () {
-      this.dataInit();
-      this.appInit();
+      // this.dataInit();
+      // this.appInit();
+      this.mockInit(); // todo 待修改或完善
     }
   };
 </script>

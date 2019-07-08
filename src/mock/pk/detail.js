@@ -17,7 +17,7 @@ for (let i = 0; i < dataNum; i++) { // 可自定义生成的个数
       'pkVictoryNumber': 1,
       'pkFailNumber': 1,
       'pkDrawNumber': 1,
-      'pkResult': 'PK_RESULT_DRAW',
+      'pkResult': 'PK_RESULT_VICTORY',
       'pkRank': 1,
       'pkStatus': 'PK_STATUS_ANSWERRING'
     }, {
