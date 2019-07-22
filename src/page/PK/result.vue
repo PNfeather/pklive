@@ -2,12 +2,12 @@
   <div name='underway' class="fillcontain">
     <header class="header">PK</header>
     <section class="cup">
-      <span>pk</span>
+      <span>PK</span>
       <img src="~@IMG/cup.png" alt="">
       <span>胜利</span>
     </section>
     <section class="pkTableDetail">
-      <div class="item" v-for="(item, index) in pkTableDetail" :key="index">
+      <div class="item" v-for="(item, index) in pkTableDetail" :key="index" v-show="hasVictory(item.pkPlayerList)">
         <div class="name" v-show="child.pkResult == 'PK_RESULT_VICTORY'" v-for="(child, childIndex) in item.pkPlayerList" :key="childIndex">{{child.studentName}}</div>
       </div>
     </section>
@@ -37,6 +37,15 @@
         pkProblemReachRate: []
       };
     },
+    computed: {
+      hasVictory () {
+        return (arr) => {
+          return arr.some((item) => {
+           return item.pkResult == 'PK_RESULT_VICTORY';
+          });
+        };
+      }
+    },
     methods: {
       putData (data) {
         this.pkTableDetail = data.pkTableDetail;
@@ -51,7 +60,6 @@
                 {
                   type: 'pie',
                   radius: ['38%', '70%'],
-                  clockWise: false,
                   itemStyle: {
                     normal: {
                       label: {
@@ -177,7 +185,7 @@
       flex: 2.8rem 0 0;
       display: flex;
       justify-content: flex-start;
-      padding: 0 0.3rem;
+      padding-left: 0.6rem;
       flex-wrap: wrap;
       .item{
         height: 100%;
@@ -186,7 +194,7 @@
         flex-direction: column;
         justify-content: flex-start;
         align-items: center;
-        margin-right: 0.45rem;
+        margin-right: 0.47rem;
         flex: 1.5rem 0 0;
         .sort{
           position: absolute;
