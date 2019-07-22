@@ -5,7 +5,7 @@ let baseUrl = process.env.BASE_URL;
 const Random = Mock.Random; // Mock.Random 是一个工具类，用于生成各种随机数据
 
 let data = []; // 用于接受生成数据的数组
-let dataNum = Random.integer(32, 40);
+let dataNum = Random.integer(12, 14);
 for (let i = 0; i < dataNum; i++) { // 可自定义生成的个数
   let template = {
     'pkPlayerList': [{

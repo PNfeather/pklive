@@ -11,7 +11,7 @@
         </div>
     </section>
     <footer class="footer">
-      <div class="item" v-for="(item, index) in pkProblemReachRate" :key="index">
+      <div class="item" v-for="(item, index) in pkProblemReachRate" :key="index" v-show="index < 7">
         <span class="sort">{{item.number}}、</span>
         <div class="chart" :id="'chart-' + index"></div>
         <div class="num">{{item.finishRate}}%</div>
@@ -50,7 +50,6 @@
                 {
                   type: 'pie',
                   radius: ['38%', '70%'],
-                  clockWise: false,
                   itemStyle: {
                     normal: {
                       label: {
@@ -170,7 +169,7 @@
       flex: 2.8rem 0 0;
       display: flex;
       justify-content: flex-start;
-      padding: 0 .3rem;
+      padding-left: .6rem;
       .item{
         height: 100%;
         position: relative;
@@ -178,7 +177,8 @@
         flex-direction: column;
         justify-content: flex-start;
         align-items: center;
-        margin-right: .45rem;
+        margin-right: .47rem;
+        flex: 1.5rem 0 0;
         .sort{
           position: absolute;
           top: 0;

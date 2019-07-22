@@ -12,7 +12,7 @@
       </div>
     </section>
     <footer class="footer">
-      <div class="item" v-for="(item, index) in pkProblemReachRate" :key="index">
+      <div class="item" v-for="(item, index) in pkProblemReachRate" :key="index" v-show="index < 7">
         <span class="sort">{{item.number}}、</span>
         <div class="chart" :id="'chart-' + index"></div>
         <div class="num">{{item.rightRate}}%</div>
