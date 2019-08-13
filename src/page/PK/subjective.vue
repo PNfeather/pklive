@@ -8,7 +8,7 @@
         <div class="table" ref="table" v-show="subjectiveQuestionList.length">
           <div class="item" v-for="(item, index) in subjectiveQuestionList" :key="index">
             <div>
-              <span class="name">{{item.name}}</span> <span class="score">{{item.score.toFixed(1)}}分</span>
+              <span class="name">{{item.name}}</span> <span class="score">{{(item.score || 0).toFixed(1)}}分</span>
             </div>
             <div>
               <span class="checker">批阅人 {{item.markerName}}</span>
@@ -21,7 +21,10 @@
     <section class="chartArea">
       <div class="title">错题反思</div>
       <div class="body">
-        <div class="chart" id="chart"></div>
+        <div class="grayCircle" v-show="noChart">
+          <div class="whiteCircle"></div>
+        </div>
+        <div v-show="!noChart" class="chart" id="chart"></div>
       </div>
     </section>
   </div>
@@ -38,7 +41,8 @@
     name: 'subjective',
     data () {
       return {
-        subjectiveQuestionList: []
+        subjectiveQuestionList: [],
+        noChart: true
       };
     },
     methods: {
@@ -98,6 +102,11 @@
       putData (data) {
         console.log(data);
         this.subjectiveQuestionList = data.subjectiveQuestionList;
+        if (!data.rethinkAbilityList || (data.rethinkAbilityList && !data.rethinkAbilityList.length)) { // 无图表数据显示灰色圈
+          this.noChart = true;
+        } else {
+          this.noChart = false;
+        }
         this.$nextTick(() => {
           let chart = echarts.init(document.getElementById('chart'));
           this.setOption(chart, data.rethinkAbilityList);
@@ -206,6 +215,23 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        .grayCircle{
+          width: 3rem;
+          height: 3rem;
+          border-radius: 100%;
+          background: #999;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          .whiteCircle{
+            width: 2rem;
+            height: 2rem;
+            border-radius: 100%;
+            background: #fff;
+            position: relative;
+            z-index: 3;
+          }
+        }
         .chart{
           width: 100%;
           height: 4.5rem;
